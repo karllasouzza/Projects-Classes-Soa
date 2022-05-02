@@ -11,7 +11,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import dao.ProdutoDAO;
-import model.Produto;
+import model.User;
 
 @Path("/wsproduto")
 public class WSProduto {
@@ -20,7 +20,7 @@ public class WSProduto {
 	@Path("/salvar")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
-	public String salvar(Produto produto) {
+	public String salvar(User produto) {
 		ProdutoDAO dao = new ProdutoDAO();
 		return dao.salvar(produto);
 	};
@@ -29,7 +29,7 @@ public class WSProduto {
 	@Path("/listartodos")
 	@Consumes(MediaType.TEXT_PLAIN)
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Produto> listarTodos() {
+	public List<User> listarTodos() {
 		ProdutoDAO dao = new ProdutoDAO();
 		return dao.listarTodos();
 	}

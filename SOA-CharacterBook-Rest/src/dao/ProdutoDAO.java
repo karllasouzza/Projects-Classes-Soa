@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import factory.ConexaoFactory;
-import model.Produto;
+import model.User;
 
 public class ProdutoDAO {
 	private Connection conexao;
@@ -17,8 +17,8 @@ public class ProdutoDAO {
 		this.conexao = new ConexaoFactory().getConexao();
 	}
 	
-	public String salvar(Produto produto) {
-		String sql = " INSERT INTO produto  " +
+	public String salvar(User produto) {
+		String sql = " INSERT INTO user  " +
 					 " (descricao, quantidade, valor) "+
 					 " VALUES (?,?,?)";
 		try {
@@ -35,14 +35,14 @@ public class ProdutoDAO {
 		}
 	}
 	
-	public List<Produto> listarTodos() {
+	public List<User> listarTodos() {
 		String sql = " SELECT * FROM produto ";
-		List<Produto> listaProdutos = new ArrayList<>();
+		List<User> listaProdutos = new ArrayList<>();
 		try {
 			PreparedStatement ps = this.conexao.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				Produto produto = new Produto();
+				User produto = new User();
 				produto.setCodigo(rs.getInt("codigo"));
 				produto.setDescricao(rs.getString("descricao"));
 				produto.setQuantidade(rs.getDouble("quantidade"));
