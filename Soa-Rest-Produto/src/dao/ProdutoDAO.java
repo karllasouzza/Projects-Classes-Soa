@@ -56,4 +56,69 @@ public class ProdutoDAO {
 			return null;
 		}
 	}
+	
+	public Produto getProdutoPorCodigo(int codigo) {
+		String sql = " SELECT * FROM produto " + 
+					 " WHERE codigo = ?";
+
+		try {
+		java.sql.PreparedStatement ps = conexao.prepareStatement(sql);;
+		ps.setInt(1, codigo);
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		Produto produto = new Produto();
+		produto.setCodigo(rs.getInt("codigo"));
+		produto.setDescricao(rs.getString("descricao"));
+		produto.setQuantidade(rs.getDouble("quantidade"));
+		produto.setValor(rs.getDouble("valor"));
+		ps.close();
+		return produto;
+		} catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	};
+	
+	public Produto getProdutoPorDescricao(String desc) {
+		String sql = " SELECT * FROM produto " + 
+					 " WHERE descricao LIKE ?";
+
+		try {
+		java.sql.PreparedStatement ps = conexao.prepareStatement(sql);
+		ps.setString(1, '%' + desc + '%');
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		Produto produto = new Produto();
+		produto.setCodigo(rs.getInt("codigo"));
+		produto.setDescricao(rs.getString("descricao"));
+		produto.setQuantidade(rs.getDouble("quantidade"));
+		produto.setValor(rs.getDouble("valor"));
+		ps.close();
+		return produto;
+		} catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	};
+	
+	public String alterar(Produto produto) {
+	String sql = " UPDATE produto " + 
+					 "SET descricao =  ?, quantidade = ?, valor = ?" + 
+					 "WHERE codigo = ?";
+
+					 
+		try {
+			PreparedStatement ps = conexao.prepareStatement(sql);
+			ps.setString(1, produto.getDescricao());
+			ps.setDouble(2, produto.getQuantidade());
+			ps.setDouble(3, produto.getValor());
+			ps.setInt(4, produto.getCodigo());
+			ps.execute();
+			ps.close();
+			return "produto alterado";
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return "Houve um erro. Tente novamente!";
+		}
+	}
 }
