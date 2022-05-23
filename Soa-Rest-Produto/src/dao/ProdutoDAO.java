@@ -121,4 +121,21 @@ public class ProdutoDAO {
 			return "Houve um erro. Tente novamente!";
 		}
 	}
+	
+	public String excluir(int codigo) {
+		String sql = "DELETE FROM produto WHERE codigo = ?";
+		
+		try {
+			PreparedStatement ps = conexao.prepareStatement(sql);
+			 ps.setInt(1, codigo);
+			 ps.execute();
+			 ps.close();
+			 return  "produto excluido";
+			 
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return "Houve um erro. Tente novamente!";
+		}
+	}
 }

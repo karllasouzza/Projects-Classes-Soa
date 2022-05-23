@@ -4,6 +4,7 @@ import java.util.List;
 
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -62,5 +63,14 @@ public class WSProduto {
 	public String alterar(Produto produto) {
 		ProdutoDAO dao = new ProdutoDAO();
 		return dao.alterar(produto);
+	}
+	
+	@DELETE
+	@Path("deletar/{codigo}")
+	@Consumes(MediaType.TEXT_PLAIN)
+	@Produces(MediaType.TEXT_PLAIN)
+	public String alterar(@PathParam("codigo") int codigo) {
+		ProdutoDAO dao = new ProdutoDAO();
+		return dao.excluir(codigo);
 	}
 }
