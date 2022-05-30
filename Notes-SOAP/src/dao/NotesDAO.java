@@ -76,7 +76,7 @@ public class NotesDAO {
 		}
 	}
 	
-	public List<Notes> GetNotByID(String searchContent) {
+	public List<Notes> GetNoteBySearch(String searchContent) {
 		String sql = " SELECT * FROM notes "+
 	                 " WHERE title  LIKE ?  OR content LIKE ?";
 		List<Notes> noteList = new ArrayList<>();

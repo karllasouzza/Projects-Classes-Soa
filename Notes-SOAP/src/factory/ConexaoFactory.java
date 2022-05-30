@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class ConexaoFactory {
 	private Connection conexao;
 	private String driver = "com.mysql.jdbc.Driver";
-	private String url ="jdbc:mysql://localhost/dbproduto";
+	private String url ="jdbc:mysql://localhost/dbnotes";
 	private String usuario = "root";
 	private String senha = "";
 	

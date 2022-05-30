@@ -11,28 +11,27 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response.ResponseBuilder;
 
 import dao.NotesDAO;
 import model.Notes;
 
-@Path("/wsproduto")
+@Path("/wsnotes")
 public class WSNotes {
 
 	@POST
-	@Path("/")
+	@Path("/insert")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
-	public String salvar(Notes note) {
+	public String Insert(Notes note) {
 		NotesDAO dao = new NotesDAO();
 		return dao.InsertNote(note);
 	}
 	
 	@GET
-	@Path("/")
+	@Path("/list")
 	@Consumes(MediaType.TEXT_PLAIN)
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Notes> listarTodos() {
+	public List<Notes> ListAll() {
 		NotesDAO dao = new NotesDAO();
 		return dao.ListALL();
 	}
@@ -41,7 +40,7 @@ public class WSNotes {
 	@Path("/getbyid/{id}")
 	@Consumes(MediaType.TEXT_PLAIN)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Notes getPorCodigo(@PathParam("id") int id) {
+	public Notes getByID(@PathParam("id") int id) {
 		NotesDAO dao = new NotesDAO();
 		return dao.GetNoteByID(id);
 	}
@@ -56,20 +55,20 @@ public class WSNotes {
 	}
 	
 	@PUT
-	@Path("/alterar")
+	@Path("/update")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
-	public String alterar(Notes produto) {
+	public String UpdateByID(Notes produto) {
 		NotesDAO dao = new NotesDAO();
-		return dao.alterar(produto);
+		return dao.UpdateNoteByID(produto);
 	}
 	
 	@DELETE
-	@Path("/excluir/{codigo}")
+	@Path("/delete/{id}")
 	@Consumes(MediaType.TEXT_PLAIN)
 	@Produces(MediaType.TEXT_PLAIN)
-	public String excluir(@PathParam("codigo") int codigo) {
+	public String DeleteByID(@PathParam("id") int id) {
 		NotesDAO dao = new NotesDAO();
-		return dao.excluir(codigo);
+		return dao.DeletNoteByID(id);
 	}
 }
